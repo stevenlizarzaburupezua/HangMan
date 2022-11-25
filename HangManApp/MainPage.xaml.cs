@@ -1,13 +1,44 @@
-﻿namespace HangManApp;
+﻿using System.ComponentModel;
 
-public partial class MainPage : ContentPage
+namespace HangManApp;
+
+public partial class MainPage : ContentPage, INotifyPropertyChanged
 {
-	int count = 0;
+	#region Fields
+
+	List<string> words = new List<string>()
+	{
+		"python",
+		"javascript",
+		"maui",
+		"csharp",
+		"mongodb",
+		"sql",
+		"xaml",
+		"word", 
+		"excel",
+		"powerpoint",
+		"code",
+		"hotreload",
+		"snipetts"
+	};
+	string answer = string.Empty;
+	#endregion
 
 	public MainPage()
 	{
 		InitializeComponent();
+		PickWord();
 	}
+
+	#region Game Engine
+
+	private	void PickWord()
+	{
+		answer = words[new Random().Next(0,words.Count)];
+	}
+
+	#endregion
 
 }
 
