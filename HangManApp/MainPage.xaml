@@ -12,7 +12,7 @@
             <Image HeightRequest="200" Source="img0.jpg"></Image>
             <Label FontSize="40"
                    HorizontalOptions="Center"
-                   Text="_ _ C _ _"
+                   Text="{Binding SpotLight}"
                    VerticalOptions="Center">
             </Label>
             <Label FontSize="Large"
