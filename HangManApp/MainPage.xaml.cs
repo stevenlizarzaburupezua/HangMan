@@ -17,6 +17,25 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 		} 
 	}
 
+    public List<char> Letters
+    {
+		get => letters;
+		set
+		{
+			letters = value;
+			OnPropertyChanged();
+		}
+    }
+
+	public string Message
+	{
+		get => message;
+		set
+		{
+            message = value;
+			OnPropertyChanged();
+		}
+	}
     #endregion
 
     #region Fields
@@ -39,13 +58,15 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 	};
     string answer = "";
 	private string spotLight;
+	public string message;
 	List<char> guessed = new List<char>();
-
+	private List<char> letters = new List<char>();
     #endregion
 
     public MainPage()
 	{
 		InitializeComponent();
+		Letters.AddRange("abcdefghijklmnopqrsstuvwxyz");
 		BindingContext = this;
 		PickWord();
 		CalculateWord(answer, guessed);
@@ -66,7 +87,41 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 		SpotLight = string.Join(' ', temp);
 	}
 
+	private void CheckIfGameWon()
+	{
+		if (SpotLight.Replace(" ", "") == answer)
+		{
+			Message = "You Win!";
+		}
+	}
+
 	#endregion
 
+	private void Button_Clicked(object sender, EventArgs e)
+	{
+		var btn = sender as Button;
+		if (btn != null)
+		{
+			var letter = btn.Text;
+			btn.IsEnabled = false;
+			HandleGuess(letter[0]);
+		}
+	}
+
+
+
+	private void HandleGuess(char letter)
+	{
+		if (guessed.IndexOf(letter) == -1)
+		{
+			guessed.Add(letter);
+		}
+
+		if (answer.IndexOf(letter) >= 0)
+		{
+			CalculateWord(answer, guessed);
+			CheckIfGameWon();
+		}
+	}
 }
 

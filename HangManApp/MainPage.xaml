@@ -4,7 +4,7 @@
              x:Class="HangManApp.MainPage">
 
     <Grid RowDefinitions=".6*,.4*">
-        <VerticalStackLayout>
+        <VerticalStackLayout Spacing="10">
             <Label
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
@@ -17,7 +17,7 @@
             </Label>
             <Label FontSize="Large"
                    HorizontalOptions="Center"
-                   Text="You Lost!"
+                   Text="{Binding Message}"
                    >
             </Label>
             <Button HorizontalOptions="Center"
@@ -27,119 +27,19 @@
         </VerticalStackLayout>
         <FlexLayout Grid.Row="1"
                     Wrap="Wrap"
-                    JustifyContent="SpaceEvenly">
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
-            <Button HeightRequest="50"
-                    WidthRequest="50"
-                    BackgroundColor="Navy"
-                    Text="A"></Button>
+                    JustifyContent="SpaceEvenly"
+                    BindableLayout.ItemsSource="{Binding Letters}"
+                    >
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Button
+                        HeightRequest="50"
+                        Text="{Binding .}"
+                        WidthRequest="50"
+                        Clicked="Button_Clicked">
+                    </Button>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
         </FlexLayout>
     </Grid>
     
