@@ -38,10 +38,20 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 	}
 	public string GameStatus 
 	{
-		get => GameStatus;
+		get => gameStatus;
 		set
 		{
 			gameStatus = value;
+			OnPropertyChanged();
+		}
+	}
+
+	public string CurrentImage
+	{
+		get => currentImage;
+		set
+		{
+			currentImage = value;
 			OnPropertyChanged();
 		}
 	}
@@ -66,9 +76,11 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 		"snipetts"
 	};
     string answer = "";
+    private string currentImage = "img0.jpg";
 	private string spotLight;
-	public string message;
-    public string gameStatus;
+    private string message;
+    private string gameStatus;
+	
     List<char> guessed = new List<char>();
 	private List<char> letters = new List<char>();
 	int mistakes = 0;
@@ -104,7 +116,9 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 		if (SpotLight.Replace(" ", "") == answer)
 		{
 			Message = "You Win!";
-		}
+			DisableLetters();
+
+        }
 	}
 
 	private void UpdateStatus()
@@ -144,6 +158,7 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 			mistakes++;
 			UpdateStatus();
 			CheckIfGameLost();
+			CurrentImage = $"img{mistakes}.jpg";
 		}
 	}
 
@@ -152,8 +167,43 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 		if (mistakes == maxWrongs)
 		{
 			Message = "You Lost!!";
+			DisableLetters();
 		}
 	}
 
+	private void DisableLetters()
+	{
+		foreach (var children in  LettersContainer.Children)
+		{
+			var btn = children as Button;
+			if (btn !=null)
+			{
+				btn.IsEnabled = false;
+			}
+		}
+	}
+
+    private void EnableLetters()
+    {
+        foreach (var children in LettersContainer.Children)
+        {
+            var btn = children as Button;
+            if (btn != null)
+            {
+                btn.IsEnabled = true;
+            }
+        }
+    }
+
+    private void Reset_Clicked(object sender, EventArgs e)
+	{
+		mistakes = 0;
+		guessed = new List<char>();
+		CurrentImage = "img0.jpg";
+		PickWord();
+		CalculateWord(answer, guessed);
+		Message = "";
+		EnableLetters();
+	}
 }
 

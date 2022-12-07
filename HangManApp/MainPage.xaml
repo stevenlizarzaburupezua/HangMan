@@ -9,7 +9,7 @@
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
                     Text="{Binding GameStatus}" />
-            <Image HeightRequest="200" Source="img0.jpg"></Image>
+            <Image HeightRequest="200" Source="{Binding CurrentImage}"></Image>
             <Label FontSize="40"
                    HorizontalOptions="Center"
                    Text="{Binding SpotLight}"
@@ -19,17 +19,18 @@
                    HorizontalOptions="Center"
                    Text="{Binding Message}"
                    >
-            </Label>
+            </Label>    
             <Button HorizontalOptions="Center"
                     Text="Reset"
-                    WidthRequest="100">
+                    WidthRequest="100"
+                    Clicked="Reset_Clicked">
             </Button>
         </VerticalStackLayout>
         <FlexLayout Grid.Row="1"
                     Wrap="Wrap"
                     JustifyContent="SpaceEvenly"
                     BindableLayout.ItemsSource="{Binding Letters}"
-                    >
+                    x:Name="LettersContainer">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <Button
