@@ -36,6 +36,15 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 			OnPropertyChanged();
 		}
 	}
+	public string GameStatus 
+	{
+		get => GameStatus;
+		set
+		{
+			gameStatus = value;
+			OnPropertyChanged();
+		}
+	}
     #endregion
 
     #region Fields
@@ -59,8 +68,11 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
     string answer = "";
 	private string spotLight;
 	public string message;
-	List<char> guessed = new List<char>();
+    public string gameStatus;
+    List<char> guessed = new List<char>();
 	private List<char> letters = new List<char>();
+	int mistakes = 0;
+	int maxWrongs = 6;
     #endregion
 
     public MainPage()
@@ -95,6 +107,11 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 		}
 	}
 
+	private void UpdateStatus()
+	{
+		GameStatus = $"Errors: {mistakes} of {maxWrongs}";
+	}
+
 	#endregion
 
 	private void Button_Clicked(object sender, EventArgs e)
@@ -122,6 +139,21 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 			CalculateWord(answer, guessed);
 			CheckIfGameWon();
 		}
+		else if(answer.IndexOf(letter) == -1)
+		{
+			mistakes++;
+			UpdateStatus();
+			CheckIfGameLost();
+		}
 	}
+
+	private void CheckIfGameLost()
+	{
+		if (mistakes == maxWrongs)
+		{
+			Message = "You Lost!!";
+		}
+	}
+
 }
 
